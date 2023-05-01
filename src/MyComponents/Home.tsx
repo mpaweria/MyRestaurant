@@ -1,6 +1,11 @@
+import NavBarComp from "./NavBarComp";
+
 function Home (){
     return (
-        <h1>This is Home Page</h1>
+        <>
+            <NavBarComp/>
+            <h1>This is Home Page</h1>
+        </>
     )
 }
 

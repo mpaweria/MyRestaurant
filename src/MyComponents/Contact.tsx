@@ -1,6 +1,11 @@
+import NavBarComp from "./NavBarComp";
+
 function Contact (){
     return (
-        <h1>This is Contact Page</h1>
+        <>
+            <NavBarComp/>
+            <h1>This is Contact Page</h1>
+        </>
     )
 }
 

@@ -1,6 +1,11 @@
+import NavBarComp from "./NavBarComp";
+
 function About (){
     return (
-        <h1>This is About Page</h1>
+        <>
+            <NavBarComp/>
+            <h1>This is About Page</h1>
+        </>
     )
 }
 
