@@ -1,4 +1,5 @@
 import { Container, Nav, Navbar } from "react-bootstrap"
+import CreateBtn from "./CreateBtn";
 
 function NavBarComp() {
     return (
@@ -7,8 +8,11 @@ function NavBarComp() {
           <Navbar.Brand href="/Home">Navbar</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link href="/Home">Home</Nav.Link>
-            <Nav.Link href="About">About Us</Nav.Link>
-            <Nav.Link href="Contact">Contact</Nav.Link>
+            <Nav.Link href="/About">About Us</Nav.Link>
+            <Nav.Link href="/Contact">Contact</Nav.Link>
+          </Nav>
+          <Nav>
+            <CreateBtn/>
           </Nav>
         </Container>
       </Navbar>

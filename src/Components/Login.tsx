@@ -30,7 +30,7 @@ function Login() {
     }
 
     return (
-            <Form className="container" onSubmit={handleSubmit}>
+            <Form className="container" style={containerStyles} onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
                 <Form.Control type="email" placeholder="Enter email" value={email} onChange={(e) => setEmail(e.target.value)}/>
@@ -44,11 +44,20 @@ function Login() {
                     // alert the error if error is not null
                     error ? <Alert variant="danger">{error}</Alert> : null
                 }
-                <Button variant="primary" type="submit"> 
-                    Submit
-                </Button>
+                <div className="text-center">
+                    <Button variant="outline-dark" type="submit" style={{width: '12X0px'}}>Login</Button>
+                </div>
             </Form>
     )
+}
+
+const containerStyles = {
+    width: '30rem',
+    marginTop: '3rem',
+    backgroundColor: '#f5f5f5',
+    border: '1px solid lightgray',
+    borderRadius: '1rem',
+    padding: '1rem',
 }
 
 export default Login;

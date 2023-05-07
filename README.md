@@ -1,6 +1,6 @@
-- [ x ] Install Bootstrap
-- [ x ] Create a Nav Bar to navigate to Home, About Us and Contact Pages
-- [ x ] Establish routing between pages
-- [ x ] Create Login Page
-- [ ] Create Menu List Component
-- [ ] Setup APIs for CRUD operations in Menu
+- [x] Install Bootstrap
+- [x] Create a Nav Bar to navigate to Home, About Us and Contact Pages
+- [x] Establish routing between pages
+- [x] Create Login Page
+- [x] Create Menu List Component
+- [x] Setup APIs for CRUD operations in Menu
