@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import { Alert, Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -30,6 +31,8 @@ function Login() {
     }
 
     return (
+        <React.Fragment>
+            <h1 style={{marginTop: '40px'}}>Welcome to Maison du Gout</h1>
             <Form className="container" style={containerStyles} onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
@@ -48,6 +51,7 @@ function Login() {
                     <Button variant="outline-dark" type="submit" style={{width: '12X0px'}}>Login</Button>
                 </div>
             </Form>
+        </React.Fragment>
     )
 }
 

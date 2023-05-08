@@ -11,6 +11,7 @@ import ViewCategory from "./ViewCategory";
 import ViewDish from "./ViewDish";
 import UpdateCategory from "./UpdateCategory";
 import UpdateDish from "./UpdateDish";
+import LandingPage from "./LandingPage";
 
 
-export {Home, About, Contact, NavBarComp, Login, CreateMenu, CreateCategory, CreateDish, ViewMenu, ViewCategory, ViewDish, UpdateCategory, UpdateDish};
+export {Home, About, Contact, NavBarComp, Login, CreateMenu, CreateCategory, CreateDish, ViewMenu, ViewCategory, ViewDish, UpdateCategory, UpdateDish, LandingPage};

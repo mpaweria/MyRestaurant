@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Dish } from "../api";
 import React from "react";
-import { Form } from "react-bootstrap";
+import { Alert, Form } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import NavBarComp from "./NavBarComp";
 import { useParams } from "react-router-dom";
@@ -13,6 +13,8 @@ function UpdateCategory() {
     const[price, setPrice] = useState(0);
     const[nature, setNature] = useState('');
     const[name, setName] = useState('');
+    const[success, setSuccess] = useState('');
+    const[error, setError] = useState('');
 
     const params = useParams();
 
@@ -24,10 +26,24 @@ function UpdateCategory() {
         dishImage: image,
         dishNature: nature
     }
+
+    function urlPatternValidation(URL:any): boolean {
+        const regex = new RegExp('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?');    
+        return regex.test(URL);
+      };
     
     function handleSubmit(e:any) {
         e.preventDefault();
-        Dish.update(data, parseInt(params.id || ''));
+        try{
+            if(urlPatternValidation(image)){
+                Dish.update(data, parseInt(params.id || ''));
+                setSuccess('Dish Updated Successfully');
+            }else{
+                setError('Invalid Image URL')
+            }            
+        }catch(e){
+            setError("Dish not updated");
+        }
     }
 
 
@@ -49,7 +65,9 @@ function UpdateCategory() {
             <NavBarComp/>
             <div className="container">
                 <h1>Update Dish</h1>
-                <Form style={containerStyles}>
+                {success ? <Alert variant="success">{success}</Alert> : null}
+                {error ? <Alert variant="danger">{error}</Alert> : null}
+                <Form className="container" style={containerStyles}>
                     <Form.Group className="mb-3">
                         <Form.Label>Select Dish</Form.Label>
                         <Form.Control type="text" id="dishId" value={params.id} disabled />

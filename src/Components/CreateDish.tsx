@@ -1,4 +1,4 @@
-import { Button, Form } from "react-bootstrap";
+import { Alert, Button, Form } from "react-bootstrap";
 import { Dish } from "../api";
 import { useState } from "react";
 import NavBarComp from "./NavBarComp";
@@ -12,6 +12,8 @@ function CreateDish() {
     const[categoryId, setCategoryId] = useState(0);
     const[price, setPrice] = useState(0);
     const[nature, setNature] = useState('');
+    const[success, setSuccess] = useState('');
+    const[error, setError] = useState('');
 
     const data = {
         dishName: name,
@@ -21,10 +23,23 @@ function CreateDish() {
         dishNature: nature
     }
 
+    function urlPatternValidation(URL:any): boolean {
+        const regex = new RegExp('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?');    
+        return regex.test(URL);
+      };
+
     function handleSubmit(e:any) {
-        // e.preventDefault();
-        Dish.create(data, categoryId);
-        console.log('category added');
+        e.preventDefault();
+        try{
+            if(urlPatternValidation(image)){
+                Dish.create(data, categoryId);
+                setSuccess('Dish Created Successfully');
+            }else{
+                setError('Invalid Image URL')
+            }            
+        }catch(e){
+            setError("Dish not created");
+        }
     }
 
     return (
@@ -32,7 +47,9 @@ function CreateDish() {
             <NavBarComp/>
             <div className="container">
                 <h1>Add New Dish</h1>
-                <Form style={containerStyles}>
+                {success ? <Alert variant="success">{success}</Alert> : null}
+                {error ? <Alert variant="danger">{error}</Alert> : null}
+                <Form className="container" style={containerStyles}>
                     <Form.Group className="mb-3">
                         <Form.Label>Select Category</Form.Label>
                         <Form.Control type="text" id="menuId" value={categoryId} onChange={(e) => setCategoryId(parseInt(e.target.value))} placeholder="Enter Category Name" />

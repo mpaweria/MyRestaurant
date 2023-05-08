@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Alert, Button, Form } from "react-bootstrap";
 import { Category } from "../api";
 import NavBarComp from "./NavBarComp";
 import React from "react";
@@ -10,6 +10,8 @@ function CreateCategory() {
     const[image, setImage] = useState('');
     const[description, setDescription] = useState('');
     const[menuId, setMenuId] = useState(0);
+    const[success, setSuccess] = useState('');
+    const[error, setError] = useState('');
 
     const data = {
         categroyName: name,
@@ -17,9 +19,23 @@ function CreateCategory() {
         categoryDescription: description
     }
 
+    function urlPatternValidation(URL:any): boolean {
+        const regex = new RegExp('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?');    
+        return regex.test(URL);
+      };
+
     function handleSubmit(e:any) {
         e.preventDefault();
-        Category.create(data, menuId);
+        try{
+            if(urlPatternValidation(image)){
+                Category.create(data, menuId);
+                setSuccess('Category Created Successfully');
+            }else{
+                setError('Invalid Image URL')
+            }            
+        }catch(e){
+            setError("Category not created");
+        }
     }
 
     return (
@@ -27,7 +43,9 @@ function CreateCategory() {
             <NavBarComp/>
             <div className="container">
                 <h1>Add New Category</h1>
-                <Form style={containerStyles}>
+                {success ? <Alert variant="success">{success}</Alert> : null}
+                {error ? <Alert variant="danger">{error}</Alert> : null}
+                <Form className="container" style={containerStyles}>
                     <Form.Group className="mb-3">
                         <Form.Label>Select Menu</Form.Label>
                         <Form.Control type="text" id="menuId" value={menuId} onChange={(e) => setMenuId(parseInt(e.target.value))} placeholder="Enter Category Name" />

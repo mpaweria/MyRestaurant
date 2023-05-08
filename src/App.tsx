@@ -1,14 +1,14 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import {Login, Home, About, Contact, CreateMenu, CreateCategory, CreateDish, ViewMenu, ViewCategory, ViewDish, UpdateCategory, UpdateDish} from './Components/index'
+import {Login, Home, About, Contact, CreateMenu, CreateCategory, CreateDish, ViewMenu, ViewCategory, ViewDish, UpdateCategory, UpdateDish, LandingPage} from './Components/index'
 
 function App() {
   return (
     // establish routing between pages
     <Router>
         <Routes>
-            <Route path='/' element={<Login/>}/>
+            <Route path='/' element={<LandingPage/>}/>
             <Route path='/Home' element={<Home/>}/>
             <Route path='/About' element={<About/>}/>
             <Route path='/Contact' element={<Contact/>}/>
@@ -20,6 +20,7 @@ function App() {
             <Route path='/ViewDish/:id' element={<ViewDish/>}/>
             <Route path='/UpdateCategory/:id' element={<UpdateCategory/>}/>
             <Route path='/UpdateDish/:id' element={<UpdateDish/>}/>
+            <Route path='/Login' element={<Login/>}/>
         </Routes>
     </Router>
   );
