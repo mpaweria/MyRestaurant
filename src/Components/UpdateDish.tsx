@@ -1,45 +1,68 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Dish } from "../api";
 import React from "react";
 import { Form } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import NavBarComp from "./NavBarComp";
+import { useParams } from "react-router-dom";
 
 function UpdateCategory() {
 
     const[image, setImage] = useState('');
     const[description, setDescription] = useState('');
-    const[dishId, setDishId] = useState(0);
     const[price, setPrice] = useState(0);
     const[nature, setNature] = useState('');
+    const[name, setName] = useState('');
+
+    const params = useParams();
 
     const data = {
-        dishImage: image,
-        dishDescription: description,
+        dishId: params.id,
+        dishName: name,
         dishPrice: price,
+        dishDescription: description,
+        dishImage: image,
         dishNature: nature
     }
     
     function handleSubmit(e:any) {
         e.preventDefault();
-        Dish.update(data, dishId);
-        console.log('dish updated');
+        Dish.update(data, parseInt(params.id || ''));
     }
+
+
+    async function getData() {
+        const dishData = await Dish.getById(parseInt(params.id || ''));
+        setName(dishData.dishName);
+        setImage(dishData.dishImage);
+        setDescription(dishData.dishDescription);
+        setNature(dishData.dishNature);
+        setPrice(dishData.dishPrice);
+    }
+
+    useEffect(()=>{
+        getData();
+    },[])
 
     return (
         <React.Fragment>
             <NavBarComp/>
             <div className="container">
-                <h1>Update Category</h1>
+                <h1>Update Dish</h1>
                 <Form style={containerStyles}>
                     <Form.Group className="mb-3">
                         <Form.Label>Select Dish</Form.Label>
-                        <Form.Control type="text" id="dishId" value={dishId} onChange={(e) => setDishId(parseInt(e.target.value))} placeholder="Enter Dish Name" />
+                        <Form.Control type="text" id="dishId" value={params.id} disabled />
                     </Form.Group>
 
                     <Form.Group className="mb-3">
-                        <Form.Label>Dish Image</Form.Label>
-                        <Form.Control type="text" id="dishImage" value={image} onChange={(e) => setImage(e.target.value)}  placeholder="Enter the URL of the Image" />
+                        <Form.Label>Dish Name</Form.Label>
+                        <Form.Control type="text" id="dishName" value={name} disabled/>
+                    </Form.Group>
+
+                    <Form.Group className="mb-3">
+                        <Form.Label>Dish Price</Form.Label>
+                        <Form.Control type="text" id="dishPrice" value={price} onChange={(e) => setPrice(parseInt(e.target.value))}  placeholder="Enter the Dish Price" />
                     </Form.Group>
 
                     <Form.Group className="mb-3">
@@ -48,8 +71,8 @@ function UpdateCategory() {
                     </Form.Group>
 
                     <Form.Group className="mb-3">
-                        <Form.Label>Dish Price</Form.Label>
-                        <Form.Control type="text" id="dishPrice" value={price} onChange={(e) => setPrice(parseInt(e.target.value))}  placeholder="Enter the Dish Price" />
+                        <Form.Label>Dish Image</Form.Label>
+                        <Form.Control type="text" id="dishImage" value={image} onChange={(e) => setImage(e.target.value)}  placeholder="Enter the URL of the Image" />
                     </Form.Group>
 
                     <Form.Group className="mb-3">

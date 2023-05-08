@@ -17,7 +17,7 @@ function ViewMenu() {
     useEffect(() => {
         getData();
     }, []);
-    
+
     return (
         <React.Fragment>
             <NavBarComp/>
@@ -28,7 +28,7 @@ function ViewMenu() {
                     {menus.length ? menus.map((m:MenuType) => {
                         return (
                             <Col sm>
-                                <MenuCard menuName={m.menuName} menuImage={m.menuImage} menuDescription={m.menuDescription}/>
+                                <MenuCard menuName={m.menuName} menuImage={m.menuImage} menuDescription={m.menuDescription} menuId={m.menuId}/>
                             </Col>
                         )
                         }) : ''

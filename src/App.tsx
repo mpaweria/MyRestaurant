@@ -16,10 +16,10 @@ function App() {
             <Route path='/CreateCategory' element={<CreateCategory/>}/>
             <Route path='/CreateDish' element={<CreateDish/>}/>
             <Route path='/ViewMenu' element={<ViewMenu/>}/>
-            <Route path='/ViewCategory' element={<ViewCategory/>}/>
-            <Route path='/ViewDish' element={<ViewDish/>}/>
-            <Route path='/UpdateCategory' element={<UpdateCategory/>}/>
-            <Route path='/UpdateDish' element={<UpdateDish/>}/>
+            <Route path='/ViewCategory/:id' element={<ViewCategory/>}/>
+            <Route path='/ViewDish/:id' element={<ViewDish/>}/>
+            <Route path='/UpdateCategory/:id' element={<UpdateCategory/>}/>
+            <Route path='/UpdateDish/:id' element={<UpdateDish/>}/>
         </Routes>
     </Router>
   );

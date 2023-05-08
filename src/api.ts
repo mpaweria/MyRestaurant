@@ -33,7 +33,7 @@ export const Category = {
         return response.json();
     },
     create: async (data: any, id: number) => {
-        const response = await fetch(`https://localhost:7176/api/Categories?menuId = ${id}`, {
+        const response = await fetch(`https://localhost:7176/api/Categories?menuId=${id}`, {
             method: "POST",
             body: JSON.stringify(data),
             headers: {
@@ -87,7 +87,6 @@ export const Dish = {
         const response = await fetch(`https://localhost:7176/api/Dishes/${id}`, {
             method: "DELETE"
         });
-        return response.json();
     },
     update: async (data: any, id: number) => {
         const response = await fetch(`https://localhost:7176/api/Dishes/${id}`, {

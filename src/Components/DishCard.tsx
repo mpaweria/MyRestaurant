@@ -16,8 +16,8 @@ function DishCard(props: DishType) {
         <Card.Text>{props.dishDescription}</Card.Text>
         <footer>{props.dishNature}</footer>
         <footer>{props.dishPrice}</footer>
-        <Button  onClick={() => navigate('/UpdateDish')}>Update</Button>
-        <Button onClick={() => Dish.delete(2)}>Delete</Button>
+        <Button  onClick={() => navigate(`/UpdateDish/${props.dishId}`)}>Update</Button>
+        <Button onClick={() => Dish.delete(props.dishId)}>Delete</Button>
       </Card.Body>
     </Card>
   );

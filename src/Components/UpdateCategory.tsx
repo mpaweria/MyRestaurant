@@ -1,26 +1,41 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Category } from "../api";
 import React from "react";
 import { Form } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import NavBarComp from "./NavBarComp";
+import { useParams } from "react-router-dom";
 
 function UpdateCategory() {
 
     const[image, setImage] = useState('');
     const[description, setDescription] = useState('');
-    const[categoryId, setCategoryId] = useState(0);
+    const[name, setName] = useState('');
+
+    const params = useParams();
 
     const data = {
+        categoryId: params.id,
+        categroyName: name,
         categoryImage: image,
         categoryDescription: description
     }
     
     function handleSubmit(e:any) {
         e.preventDefault();
-        Category.update(data, categoryId);
-        console.log('category updated');
+        Category.update(data, parseInt(params.id || ''));
     }
+
+    async function getData(){
+        const categoryData = await Category.getById(parseInt(params.id || ''));
+        setName(categoryData.categroyName);
+        setImage(categoryData.categoryImage);
+        setDescription(categoryData.categoryDescription);
+    }
+
+    useEffect(() => {
+        getData();
+    }, [])
 
     return (
         <React.Fragment>
@@ -29,8 +44,13 @@ function UpdateCategory() {
                 <h1>Update Category</h1>
                 <Form style={containerStyles}>
                     <Form.Group className="mb-3">
-                        <Form.Label>Select Category</Form.Label>
-                        <Form.Control type="text" id="categoryId" value={categoryId} onChange={(e) => setCategoryId(parseInt(e.target.value))} placeholder="Enter Category Name" />
+                        <Form.Label>Category Id</Form.Label>
+                        <Form.Control type="text" id="categoryId" value={parseInt(params.id || '')}  disabled />
+                    </Form.Group>
+
+                    <Form.Group className="mb-3">
+                        <Form.Label>Category Name</Form.Label>
+                        <Form.Control type="text" id="categroyName" value={name}  disabled />
                     </Form.Group>
 
                     <Form.Group className="mb-3">

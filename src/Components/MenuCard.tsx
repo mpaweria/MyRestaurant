@@ -12,7 +12,7 @@ function MenuCard(props: MenuType) {
             <Card.Body>
                 <Card.Title>{props.menuName}</Card.Title>
                 <Card.Text>{props.menuDescription}</Card.Text>
-                <Button variant="primary" onClick={() => navigate('/ViewCategory')}>View</Button>
+                <Button variant="primary" onClick={() => navigate(`/ViewCategory/${props.menuId}`)}>View</Button>
             </Card.Body>
         </Card>
     )

@@ -20,7 +20,6 @@ function CreateCategory() {
     function handleSubmit(e:any) {
         e.preventDefault();
         Category.create(data, menuId);
-        console.log(data);
     }
 
     return (
